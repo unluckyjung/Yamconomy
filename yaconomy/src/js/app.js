@@ -56,7 +56,7 @@ App = {
 
       var account = accounts[0];
         //위에서 받은것들을 매개변수로 넘김
-      App.contracts.Yamconomy.deployed().then(function(instance){ 
+      App.contracts.Yamconomy.deployed().then(function(instance){ //지금 이 함수가 안돌아간다.
         //배포가 되었다면 인스턴스를 받아라.
         var reviewUtf8Encoded = utf8.encode(review);
         //한글이 쓰이므로 인코딩이 필요함.(utf8.js 라이브러리 추가)
