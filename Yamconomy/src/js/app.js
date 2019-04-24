@@ -3,7 +3,7 @@ App = {
   contracts: {},
 	
   init: function() {
-    $.getJSON('../yam.json', function(data){
+    $.getJSON('../yam.json', function(data){  //여기가 yam json을 여는곳. yamconomy -> yam으로 변경
       var list = $('#list');
       var template = $('#template');
 
@@ -36,7 +36,7 @@ App = {
   },
 
   initContract: function() {
-		$.getJSON('Yamconomy.json',function(data){
+		$.getJSON('Yamconomy.json',function(data){  //여기가 컨트랙(yamconomy)의 json을 여는곳.
       App.contracts.Yamconomy = TruffleContract(data);
       App.contracts.Yamconomy.setProvider(App.web3Provider);
     });
@@ -56,7 +56,7 @@ App = {
 
       var account = accounts[0];
         //위에서 받은것들을 매개변수로 넘김
-      App.contracts.Yamconomy.deployed().then(function(instance){ //지금 이 함수가 안돌아간다.
+      App.contracts.Yamconomy.deployed().then(function(instance){ //yam.json으로 변경하여서 컨트랙 진행
         //배포가 되었다면 인스턴스를 받아라.
         var reviewUtf8Encoded = utf8.encode(review);
         //한글이 쓰이므로 인코딩이 필요함.(utf8.js 라이브러리 추가)
