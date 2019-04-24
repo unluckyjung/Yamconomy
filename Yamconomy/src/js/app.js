@@ -3,7 +3,7 @@ App = {
   contracts: {},
 	
   init: function() {
-    $.getJSON('../yamconomy.json', function(data){
+    $.getJSON('../yam.json', function(data){
       var list = $('#list');
       var template = $('#template');
 
