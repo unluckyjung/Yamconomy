@@ -118,4 +118,19 @@ $(function() {
     $(e.currentTarget).find('#id').val(id);
     $(e.currentTarget).find('#price').val(price);
   });
+
+  $('#reviewerInfoModal').on('show.bs.modal',function(e){
+    var id = $(e.relatedTarget).parent().find('.id').text();
+
+    App.contracts.Yamconomy.deployed().then(function(instance) {
+      return instance.getReviewerInfo.call(id);
+    }).then(function(reviewerInfo) {
+      $(e.currentTarget).find('#reviewerAddress').text(reviewerInfo[0]);
+      $(e.currentTarget).find('#reviewerReview').text(web3.toUtf8(reviewerInfo[1]));
+      $(e.currentTarget).find('#reviewerScore').text(reviewerInfo[2]);
+    }).catch(function(err) {
+      console.log(err.message);
+    })
+
+  });
 });
