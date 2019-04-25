@@ -1,6 +1,7 @@
 [
   {
     "id": 0,
+    "name": "충만치킨",
     "type": "치킨",
     "picture": "images/chicken.jpg",
     "location": "12/34",
@@ -8,6 +9,7 @@
   },
   {
     "id": 1,
+    "name": "마이마이치킨",
     "type": "치킨",
     "picture": "images/chicken.jpg",
     "location": "12/34",
@@ -15,6 +17,7 @@
   },
   {
     "id": 2,
+    "name": "썬더치킨",
     "type": "치킨",
     "picture": "images/chicken.jpg",
     "location": "12/34",
@@ -22,6 +25,7 @@
   },
   {
     "id": 3,
+    "name": "파스타먹은닭",
     "type": "치킨",
     "picture": "images/chicken.jpg",
     "location": "12/34",
@@ -29,6 +33,7 @@
   },
   {
     "id": 4,
+    "name": "피자스쿨",
     "type": "피자",
     "picture": "images/pizza.jpg",
     "location": "12/34",
@@ -36,6 +41,7 @@
   },
   {
     "id": 5,
+    "name": "피자게이트",
     "type": "피자",
     "picture": "images/pizza.jpg",
     "location": "12/34",
@@ -43,6 +49,7 @@
   },
   {
     "id": 6,
+    "name": "피자헛",
     "type": "피자",
     "picture": "images/pizza.jpg",
     "location": "12/34",
@@ -50,6 +57,7 @@
   },
   {
     "id": 7,
+    "name": "학식피자",
     "type": "피자",
     "picture": "images/pizza.jpg",
     "location": "12/34",
@@ -57,6 +65,7 @@
   },
   {
     "id": 8,
+    "name": "용반점",
     "type": "짜장면",
     "picture": "images/jjajang.jpg",
     "location": "12/34",
@@ -64,6 +73,7 @@
   },
   {
     "id": 9,
+    "name": "장강",
     "type": "짜장면",
     "picture": "images/jjajang.jpg",
     "location": "12/34",
