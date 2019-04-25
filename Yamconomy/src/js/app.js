@@ -10,6 +10,7 @@ App = {
       for (i = 0; i< data.length; i++){
         template.find('img').attr('src',data[i].picture);
         template.find('.id').text(data[i].id);
+        template.find('.name').text(data[i].name);
         template.find('.type').text(data[i].type);
         template.find('.location').text(data[i].location);
         template.find('.price').text(data[i].price);
