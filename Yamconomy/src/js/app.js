@@ -39,6 +39,7 @@ App = {
 		$.getJSON('Yamconomy.json',function(data){  //여기가 컨트랙(yamconomy)의 json을 여는곳.
       App.contracts.Yamconomy = TruffleContract(data);
       App.contracts.Yamconomy.setProvider(App.web3Provider);
+      return App.loadReview();
     });
   },
 
@@ -69,6 +70,7 @@ App = {
         $('#review').val('');//이전에 모달에 입력된 내용들을 지운다.
         $('#score').val('');
         $('#writeModal').modal('hide');
+        return App.loadReview();
       }).catch(function(err){
 
         console.log(err.message);
@@ -78,7 +80,25 @@ App = {
   },
 
   loadReview: function() {
-	
+    App.contracts.Yamconomy.deployed().then(function(instance){
+      return instance.getAllReviewers.call();
+    }).then(function(reviewers){
+      for( i = 0; i<reviewers.length; i++){
+        //reviewers 는 10개의 배열 사이즈를 가지고 있으므로 10번 돌것이다.
+        if(reviewers[i] !=='0x0000000000000000000000000000000000000000'){
+          //이 배열에 들어가있는 주소가 없다면?
+          //이더리움 주소길이인 40개의 0으로 초기화 해야함. 이더에선 NULL 로 대체불가.
+          
+          $('.panel-yamconomy').eq(i).find('.btn-review').text('리뷰작성완료').attr('disabled', true);
+          //html의 yamconomy review 버튼을 리뷰 작성완료로 변경하고, 비활성화한다.
+          $('.panel-yamconomy').eq(i).find('.btn-reviewerInfo').removeAttr('style');
+          //이전에 숨김(display none)되어있던 reviwerInfo를 다시 보이게 해준다.
+
+        }
+      }
+    }).catch(function(err){
+      console.log(err.message);
+    })
   },
 	
   listenToEvents: function() {
