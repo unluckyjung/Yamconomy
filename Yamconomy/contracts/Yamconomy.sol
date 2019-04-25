@@ -59,8 +59,7 @@ contract Yamconomy {
         return (reviewer.reviewerAddress, reviewer.review, reviewer.score); 
         //리턴되는 리뷰어의 계정주소, 리뷰, 점수
     }
+    function getAllReviewers() public view returns (address[10]){
+        return reviewers;
+    }
 }
-
-
-
-
