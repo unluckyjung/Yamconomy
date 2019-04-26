@@ -4,7 +4,7 @@
     "name": "충만치킨",
     "type": "치킨",
     "picture": "images/충만치킨.jpg",
-    "location": "12/34",
+    "location": "전북대 정문",
     "price": 0
   },
   {
@@ -12,7 +12,7 @@
     "name": "마이마이치킨",
     "type": "치킨",
     "picture": "images/마이마이치킨.jpg",
-    "location": "12/34",
+    "location": "전북대 정문",
     "price": 0
   },
   {
@@ -20,7 +20,7 @@
     "name": "다사랑치킨",
     "type": "치킨",
     "picture": "images/다사랑치킨.jpg",
-    "location": "12/34",
+    "location": "전북대 정문",
     "price": 0
   },
   {
@@ -28,7 +28,7 @@
     "name": "파스타먹은닭",
     "type": "치킨",
     "picture": "images/파스타먹은닭.jpg",
-    "location": "12/34",
+    "location": "사대부고 사거리",
     "price": 0
   },
   {
@@ -36,7 +36,7 @@
     "name": "피자스쿨",
     "type": "피자",
     "picture": "images/피자스쿨.jpg",
-    "location": "12/34",
+    "location": "사대부고 사거리",
     "price": 0
   },
   {
@@ -44,7 +44,7 @@
     "name": "피자게이트",
     "type": "피자",
     "picture": "images/피자게이트.jpg",
-    "location": "12/34",
+    "location": "사대부고 사거리 길목",
     "price": 0
   },
   {
@@ -52,7 +52,7 @@
     "name": "피자헛",
     "type": "피자",
     "picture": "images/피자헛.jpg",
-    "location": "12/34",
+    "location": "사대부고 사거리",
     "price": 0
   },
   {
@@ -60,7 +60,7 @@
     "name": "학식피자",
     "type": "피자",
     "picture": "images/학식피자.jpg",
-    "location": "12/34",
+    "location": "후생관",
     "price": 0
   },
   {
@@ -68,7 +68,7 @@
     "name": "용반점",
     "type": "중국집",
     "picture": "images/용반점.jpg",
-    "location": "12/34",
+    "location": "사대부고 사거리 길목",
     "price": 0
   },
   {
@@ -76,7 +76,7 @@
     "name": "영빈관",
     "type": "중국집",
     "picture": "images/영빈관.jpg",
-    "location": "12/34",
+    "location": "실크로드",
     "price": 0
   }
 ]
