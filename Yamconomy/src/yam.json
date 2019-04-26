@@ -3,7 +3,7 @@
     "id": 0,
     "name": "충만치킨",
     "type": "치킨",
-    "picture": "images/chicken.jpg",
+    "picture": "images/충만치킨.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -11,15 +11,15 @@
     "id": 1,
     "name": "마이마이치킨",
     "type": "치킨",
-    "picture": "images/chicken.jpg",
+    "picture": "images/마이마이치킨.jpg",
     "location": "12/34",
     "price": 0
   },
   {
     "id": 2,
-    "name": "썬더치킨",
+    "name": "다사랑치킨",
     "type": "치킨",
-    "picture": "images/chicken.jpg",
+    "picture": "images/다사랑치킨.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -27,7 +27,7 @@
     "id": 3,
     "name": "파스타먹은닭",
     "type": "치킨",
-    "picture": "images/chicken.jpg",
+    "picture": "images/파스타먹은닭.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -35,7 +35,7 @@
     "id": 4,
     "name": "피자스쿨",
     "type": "피자",
-    "picture": "images/pizza.jpg",
+    "picture": "images/피자스쿨.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -43,7 +43,7 @@
     "id": 5,
     "name": "피자게이트",
     "type": "피자",
-    "picture": "images/pizza.jpg",
+    "picture": "images/피자게이트.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -51,7 +51,7 @@
     "id": 6,
     "name": "피자헛",
     "type": "피자",
-    "picture": "images/pizza.jpg",
+    "picture": "images/피자헛.jpg",
     "location": "12/34",
     "price": 0
   },
@@ -59,23 +59,23 @@
     "id": 7,
     "name": "학식피자",
     "type": "피자",
-    "picture": "images/pizza.jpg",
+    "picture": "images/학식피자.jpg",
     "location": "12/34",
     "price": 0
   },
   {
     "id": 8,
     "name": "용반점",
-    "type": "짜장면",
-    "picture": "images/jjajang.jpg",
+    "type": "중국집",
+    "picture": "images/용반점.jpg",
     "location": "12/34",
     "price": 0
   },
   {
     "id": 9,
-    "name": "장강",
-    "type": "짜장면",
-    "picture": "images/jjajang.jpg",
+    "name": "영빈관",
+    "type": "중국집",
+    "picture": "images/영빈관.jpg",
     "location": "12/34",
     "price": 0
   }
