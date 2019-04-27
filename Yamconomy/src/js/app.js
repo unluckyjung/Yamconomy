@@ -49,6 +49,8 @@ App = {
     var price = $('#price').val();
     var review = $('#review').val();
     var score = $('#score').val();
+    var menu = $('#menu').val();
+
 
 
     web3.eth.getAccounts(function(error,accounts){  //계정을 불러온다.
@@ -61,8 +63,9 @@ App = {
       App.contracts.Yamconomy.deployed().then(function(instance){ //yam.json으로 변경하여서 컨트랙 진행
         //배포가 되었다면 인스턴스를 받아라.
         var reviewUtf8Encoded = utf8.encode(review);
+        var menuUtf8Encoded = utf8.encode(menu);
         //한글이 쓰이므로 인코딩이 필요함.(utf8.js 라이브러리 추가)
-        return instance.writeReview(id, web3.toHex(reviewUtf8Encoded),score, {from: account, value: price});
+        return instance.writeReview(id, web3.toHex(reviewUtf8Encoded),score, web3.toHex(menuUtf8Encoded),{from: account, value: price});
         //매개변수로 data를 넘김
         //이때 리뷰는 인코딩 한걸 다시 Hex로 변환이 필요함.
         //0이더를 보냄으로써 기록함.
@@ -70,6 +73,7 @@ App = {
       }).then(function(){ //잘 작동을 한다면
         $('#review').val('');//이전에 모달에 입력된 내용들을 지운다.
         $('#score').val('');
+        $('#menu').val('');
         $('#writeModal').modal('hide');
         return App.loadReview();
       }).catch(function(err){
@@ -130,6 +134,7 @@ $(function() {
       $(e.currentTarget).find('#reviewerAddress').text(reviewerInfo[0]);
       $(e.currentTarget).find('#reviewerReview').text(web3.toUtf8(reviewerInfo[1]));
       $(e.currentTarget).find('#reviewerScore').text(reviewerInfo[2]);
+      $(e.currentTarget).find('#reviewerMenu').text(web3.toUtf8(reviewerInfo[3]));
     }).catch(function(err) {
       console.log(err.message);
     })
