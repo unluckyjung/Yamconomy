@@ -90,7 +90,8 @@ App = {
           //이 배열에 들어가있는 주소가 없다면?
           //이더리움 주소길이인 40개의 0으로 초기화 해야함. 이더에선 NULL 로 대체불가.
           
-          $('.panel-yamconomy').eq(i).find('.btn-review').text('리뷰작성완료').attr('disabled', true);
+          //$('.panel-yamconomy').eq(i).find('.btn-review').text('리뷰작성완료').attr('disabled', true); 
+          //이거 비활성화하면 중간발표때 한가게에 리뷰 하나밖에 못쓰냐고 뭐라고 할꺼같아서 계속 활성화 해두는걸로 변경.
           //html의 yamconomy review 버튼을 리뷰 작성완료로 변경하고, 비활성화한다.
           $('.panel-yamconomy').eq(i).find('.btn-reviewerInfo').removeAttr('style');
           //이전에 숨김(display none)되어있던 reviwerInfo를 다시 보이게 해준다.
