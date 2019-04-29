@@ -17,7 +17,7 @@ contract Yamconomy {
     //즉 배포할때 사용된 계정이 컨트랙의 소유자가 되는것.
     address public owner;   //이 컨트랙의 주인
 
-    address[10] public reviewers;
+    address[10] public reviewers; //이부분을 2차원 배열로 하면, 여러 리뷰를 받을 수 있을까 생각..
 
     event LogReview(  //누군가가 리뷰를 작성했음을 사람들에게 알려줌.
         //이것을 알려주기 위해서는, 리뷰어의 계정 주소와 가게 ID가 필요함.
