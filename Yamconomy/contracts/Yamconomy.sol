@@ -8,7 +8,7 @@ contract Yamconomy {
         bytes32 review;
         uint score;
         bytes32 menu; //메뉴 추가.
-        uint vote = 0;
+        uint vote;
     }
 
     mapping (uint => Reviewer) public reviewerInfo;
@@ -41,7 +41,7 @@ contract Yamconomy {
         require(_id >=0 && _id <=9);
         reviewers[_id] = msg.sender;   //만약 id 0번째에 쓰면, buyers[0] 에 리뷰어의 주소가 저장이된다. 
         //이 정보를 이용하여, 한번 쓴리뷰는 다시 작성이 불가능하게 막을것.
-        reviewerInfo[_id] = Reviewer(msg.sender, _review, _score, _menu);
+        reviewerInfo[_id] = Reviewer(msg.sender, _review, _score, _menu, 0);    //vote default를 0으로 줌.
         //현재 리뷰를 작성한 계정 주소와, 리뷰 내용, 평점을 넘겨서 mapping의 value값을 만든다.
         //id가 매핑에서 아주 중요하게 쓰이고 있음.
 
@@ -52,13 +52,13 @@ contract Yamconomy {
         //해당 이벤트에 msg.sender와 id를 넘겨서 이벤트를 발생 시키겠다.
     }
 
-    function getReviewerInfo(uint _id) public view returns (address, bytes32, uint, bytes32){
+    function getReviewerInfo(uint _id) public view returns (address, bytes32, uint, bytes32, uint){
     //매개변수로 가게의 ID를 받아 리뷰어의 정보를 가져오는 함수.
     //id를 reveiwerInfo의 key로 쓰고, 해당 value값을 가져와야함. (매핑이용)
         Reviewer memory reviewer = reviewerInfo[_id];
         //reviewerInfo에 매개변수 id를 이용하여, 해당 value(Reviewyer)를 불러와서 변수 reviewr에 저장
         
-        return (reviewer.reviewerAddress, reviewer.review, reviewer.score, reviewer.menu); 
+        return (reviewer.reviewerAddress, reviewer.review, reviewer.score, reviewer.menu, reviewer.vote); 
         //리턴되는 리뷰어의 계정주소, 리뷰, 점수
     }
 
@@ -72,7 +72,7 @@ contract Yamconomy {
         return (reviewer.vote);
     }
     
-    function addVote(uint id) public payable{
+    function addVote(uint _id) public payable{
         Reviewer memory reviewer = reviewerInfo[_id];
         reviewer.vote = reviewer.vote + 1;
     }
