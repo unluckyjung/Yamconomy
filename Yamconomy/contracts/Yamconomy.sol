@@ -1,5 +1,5 @@
 pragma solidity ^0.4.23;
-
+//import "./YamToken.sol";
 contract Yamconomy {
 
 
@@ -8,6 +8,7 @@ contract Yamconomy {
         bytes32 review;
         uint score;
         bytes32 menu; //메뉴 추가.
+        uint vote = 0;
     }
 
     mapping (uint => Reviewer) public reviewerInfo;
@@ -60,7 +61,19 @@ contract Yamconomy {
         return (reviewer.reviewerAddress, reviewer.review, reviewer.score, reviewer.menu); 
         //리턴되는 리뷰어의 계정주소, 리뷰, 점수
     }
+
     function getAllReviewers() public view returns (address[10]){
         return reviewers;
+    }
+
+    function getVote(uint _id) public view returns (uint){ 
+        //Vote를 불러오는 함수.
+        Reviewer memory reviewer = reviewerInfo[_id];
+        return (reviewer.vote);
+    }
+    
+    function addVote(uint id) public payable{
+        Reviewer memory reviewer = reviewerInfo[_id];
+        reviewer.vote = reviewer.vote + 1;
     }
 }
