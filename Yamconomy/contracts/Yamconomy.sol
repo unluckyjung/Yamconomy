@@ -41,7 +41,7 @@ contract Yamconomy {
         require(_id >=0 && _id <=9);
         reviewers[_id] = msg.sender;   //만약 id 0번째에 쓰면, buyers[0] 에 리뷰어의 주소가 저장이된다. 
         //이 정보를 이용하여, 한번 쓴리뷰는 다시 작성이 불가능하게 막을것.
-        reviewerInfo[_id] = Reviewer(msg.sender, _review, _score, _menu, 0);    //vote default를 0으로 줌.
+        reviewerInfo[_id] = Reviewer(msg.sender, _review, _score, _menu, 5);    //vote default를 5으로 줌.
         //현재 리뷰를 작성한 계정 주소와, 리뷰 내용, 평점을 넘겨서 mapping의 value값을 만든다.
         //id가 매핑에서 아주 중요하게 쓰이고 있음.
 
@@ -66,14 +66,17 @@ contract Yamconomy {
         return reviewers;
     }
 
+
+
     function getVote(uint _id) public view returns (uint){ 
         //Vote를 불러오는 함수.
         Reviewer memory reviewer = reviewerInfo[_id];
         return (reviewer.vote);
     }
     
+    //이새기가 제대로 작동을 안한다.
     function addVote(uint _id) public payable{
         Reviewer memory reviewer = reviewerInfo[_id];
-        reviewer.vote = reviewer.vote + 1;
+        reviewer.vote = 10;
     }
 }
