@@ -67,14 +67,13 @@ contract Yamconomy {
     }
 
 
-
+    //Vote를 불러오는 함수.
     function getVote(uint _id) public view returns (uint){ 
-        //Vote를 불러오는 함수.
         Reviewer memory reviewer = reviewerInfo[_id];
         return (reviewer.vote);
     }
     
-    //이새기가 제대로 작동을 안한다.
+    //vote를 1씩 올리는 함수.
     function addVote(uint _id) public payable{
         Reviewer storage updatereviewer = reviewerInfo[_id];
         //memory > storage로 변경후 해결.
