@@ -78,7 +78,6 @@ contract Yamconomy {
         Reviewer storage updatereviewer = reviewerInfo[_id];
         //memory > storage로 변경후 해결.
         updatereviewer.vote = updatereviewer.vote + 1 ;
-
         //혹은 
         //Reviewer memory updatereviewer = reviewerInfo[_id];
         //reviewers[_id] = reviewer 을 햇으면 됬을것.
