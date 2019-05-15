@@ -80,7 +80,6 @@
             <input type="text" class ="form-control" id="review" placeholder="리뷰" /><br/>
             <input type="number" class ="form-control" id="score" placeholder="점수" /><br/>
             <input type="text" class ="form-control" id="menu" placeholder="추천 메뉴" /><br/>
-            <input type="number" class ="form-control" id="vote" placeholder="추천" /><br/>
 
           </div>
           <div class="modal-footer">
@@ -110,6 +109,8 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+            <button type="button" class="btn btn-primary" onclick="App.addVote(); return false;">추천</button>
+
 
           </div>
         </div><!-- /.modal-content -->
