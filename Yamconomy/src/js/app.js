@@ -85,7 +85,7 @@ App = {
   },
 
   addVote: function() {	
-    var id = $('#id').val();
+    var id = $('#id').val(); //id는 yam.json의 가게 고유의 id값.
     var price = $('#price').val();  //price는 0이더임.
 
 
@@ -94,12 +94,13 @@ App = {
         console.log(error);
       }
 
-      var account = accounts[0];
+      var account = accounts[0]; 
         //위에서 받은것들을 매개변수로 넘김
       App.contracts.Yamconomy.deployed().then(function(instance){ 
 
         return instance.addVote(id,{from: account, value: price});
-
+        //0이더 전송하는식으로 트랜잭션 발생.
+        //이더 전송안하면서 트랜잭션 발생시도 해봤는데 안되던데? 
       }).catch(function(err){
         console.log(err.message);
       });
