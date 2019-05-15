@@ -84,6 +84,31 @@ App = {
 
   },
 
+  addVote: function() {	
+    var id = $('#id').val();
+    var price = $('#price').val();  //price는 0이더임.
+
+
+    web3.eth.getAccounts(function(error,accounts){  //계정을 불러온다.
+      if(error){
+        console.log(error);
+      }
+
+      var account = accounts[0];
+        //위에서 받은것들을 매개변수로 넘김
+      App.contracts.Yamconomy.deployed().then(function(instance){ 
+
+        return instance.addVote(id,{from: account, value: price});
+
+      }).catch(function(err){
+        console.log(err.message);
+      });
+    });
+
+  },
+
+
+
   loadReview: function() {
     App.contracts.Yamconomy.deployed().then(function(instance){
       return instance.getAllReviewers.call();
