@@ -135,6 +135,8 @@ $(function() {
       $(e.currentTarget).find('#reviewerReview').text(web3.toUtf8(reviewerInfo[1]));
       $(e.currentTarget).find('#reviewerScore').text(reviewerInfo[2]);
       $(e.currentTarget).find('#reviewerMenu').text(web3.toUtf8(reviewerInfo[3]));
+      $(e.currentTarget).find('#reviewerVote').text(reviewerInfo[4]);
+
     }).catch(function(err) {
       console.log(err.message);
     })
