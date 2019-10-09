@@ -1,0 +1,15 @@
+<html>
+
+	<body>
+		<h2> Welcome! 현재 페이지는 임시입니다. </h2>
+		<% if(session.user_id) { %>
+		<h2> 환영합니다.</h2>
+		<button type="button" onclick="location.href='/write' "> 리뷰 쓰기</button>
+		<button type="button" onclick="location.href='/logout' ">로그아웃</button>
+			<% } else { %>
+			 <button type="button" onclick="location.href='/login' "> 로그인</button>
+                 <button type="button" onclick="location.href='/register' "> 회원가입</button>
+			<% } %>
+
+	</body>
+</html>

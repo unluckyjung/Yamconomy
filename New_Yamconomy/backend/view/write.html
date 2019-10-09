@@ -1,0 +1,28 @@
+<html>
+
+	<head>
+		<title>리뷰 쓰기</title>
+		meta(charset='utf-8');
+	</head>
+
+	<body>
+		<% if(session.user_id) { %>
+		<form method="post" action="/write_check" enctype="multipart/form-data">
+			<input name="review[id]" value= <%= session.user_id %> type="hidden" />
+                        <input name="review[subject]" placeholder="제목" type="text" />
+                        <input name="review[contents]" placeholder="내용" type="text" />
+			<input name="image" id="image" placeholder="이미지" type="file" />
+                <input type="submit" value="전송" > </button>
+                </form>
+
+		<% } else { %>
+			<script>alert('로그인 해주세요!');window.location.href='/';</script>
+
+		<% } %>
+		
+	</body>
+
+
+
+
+</html>
