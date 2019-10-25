@@ -14,10 +14,10 @@ var multer = require('multer');
 var upload = multer({
 	storage: multer.diskStorage({
 		destination: function(req,file,cb) {
-			cb(null, 'uploads');
+			cb(null, './uploads');
 		},
 		filename: function(req, file, cb) {
-			cb(null, Date.now() + '-' + file.originalname);
+			cb(null, Date.now() + "-" + file.originalname);
 		}
 	})
 });
@@ -33,6 +33,8 @@ module.exports = function(app) {
 
 	//여기서 urlencoded를 써야 정상적으로 POST가 작동한다.
 	app.use(bodyParser.urlencoded({ extended:true}));
+	//Front 단에서 데이터를 받기 위해 추가됨
+	app.use(bodyParser.json());
 	//index.html 
 	app.get('/', function(req, res) {
 		console.log(req.session);
@@ -56,7 +58,10 @@ module.exports = function(app) {
 	//frontend 연동 테스트용 - 성공함. 사용 시 /api/~~ 이렇게 써줘야 한다.
 	app.get('/api/hello', function(req, res) {
 		console.log('처리');
-		res.send({message:'Hello..?'});
+		database.select_test(function (err,data) {
+			var dataing = data[0].ID;
+			res.send({message:"hello..?",data:dataing});
+		});
 	});
 
 	//get 테스트 체크용 - 정상작동
@@ -79,11 +84,11 @@ module.exports = function(app) {
 	});
 	
 	//post 테스트 체크용 - 여기서 urlencoded 써줘야 작동함;; 좆병신
-	app.post('/login_check', function(req, res) {
+	app.post('/api/login_check', function(req, res) {
 		console.log(req.body);
 		//ID, PW, Wallet 받아서 POST로 넘겨주기
-		var ID = req.body.usr.id;
-		var PW = req.body.usr.pw;
+		var ID = req.body.ID;
+		var PW = req.body.PW;
 		var PW_HASH = crypto.createHash('sha1');
 		PW_HASH.update(PW);
 		var PW_OUTPUT = PW_HASH.digest('hex');
@@ -91,34 +96,41 @@ module.exports = function(app) {
 		//login 시 function으로 데이터를 받아 처리한다. 아래는 로그인 가능 불가능에 대한 것 뿐이니, result가 null이냐 아니냐에 따라서만 처리한다.
 		database.login(ID,PW_OUTPUT, function(err,result) {
 		if(result == null) {
-			res.send("<script>alert('로그인 실패!');window.location.href = '/login';</script>");
+			res.send('Failure');
 		} else {
 			console.log('Success!');
-			req.session.user_id = ID;
-			res.send("<script>alert('로그인 완료!');window.location.href = '/';</script>");
+			res.send('Success');
                 //res.render('login_check.html', {ID:ID,PW:PW_OUTPUT,result:result, method:"post"});
 			}
 		});
 	});
 
 	//register 진행 시 값이 있는지 확인하고 없는 경우 가입한다.
-	app.post('/register_check', function(req, res) {
+	app.post('/api/register_check', function(req, res) {
                 console.log(req.body);
                 //ID, PW, Wallet 받아서 POST로 넘겨주기
                 var ID = req.body.usr.id;
                 var PW = req.body.usr.pw;
+		var PW_CHECK = req.body.pw_check;
 		var Wallet = req.body.usr.wallet;
+		var wallet_check = req.body.wallet_check;
+		if(Wallet == wallet_check && PW == PW_CHECK) {
 		//입력받은 PW Hashing 처리
-                var PW_HASH = crypto.createHash('sha1');
-                PW_HASH.update(PW);
-                var PW_OUTPUT = PW_HASH.digest('hex');
-		//가입 후 정상적으로 처리된 경우 완료, 안될경우 실패 표시, 참고로 res.send와 res.render은 동시 사용 불가능하다. header가 둘 중 한번 이미 전송된 상태라 한번을 못 받기 때문.
-                var result = database.register(ID,PW_OUTPUT,Wallet);
-		if(result) {
-		res.send("<script>alert('회원 가입 완료');window.location.href = '/';</script>"); }
-		else {
-			//이미 작성한 데이터가 있으므로 history.back() 함수를 이용하여 입력한 데이터를 보존시킨다
-		res.send("<script>alert('회원 가입 실패, 동일 아이디가 존재합니다.');window.history.back();</script>");
+                	var PW_HASH = crypto.createHash('sha1');
+                	PW_HASH.update(PW);
+                	var PW_OUTPUT = PW_HASH.digest('hex');
+			//가입 후 정상적으로 처리된 경우 완료, 안될경우 실패 표시, 참고로 res.send와 res.render은 동시 사용 불가능하다. header가 둘 중 한번 이미 전송된 상태라 한번을 못 받기 때문.
+			//api로 데이터 전송 - 처리 과정 중 true, false 값이 정상적으로 왔다갔다 하지 못하므로, function을 따로 구현해서 진행해야 한다.
+                	database.register(ID,PW_OUTPUT,Wallet, function(err, data) {
+				if(!err) {
+					 res.send("<script>alert('회원 가입 완료');window.location.href = '/';</script>");
+				} else {
+					//이미 작성한 데이터가 있으므로 history.back() 함수를 이용하여 입력한 데이터를 보존시킨다
+					res.send("<script>alert('회원 가입 실패, 동일 아이디가 존재합니다.');window.history.back();</script>");
+				}
+			});
+		} else {
+			res.send("<script>alert('회원 가입 실패, 아이디 또는 비밀번호가 틀립니다.');window.history.back();</script>");
 		}
 		//데이터 전송 체크용 설정
                 //res.render('register_check.html', {ID:ID,PW:PW_OUTPUT,Wallet:Wallet, method:"post"});
@@ -141,22 +153,32 @@ module.exports = function(app) {
 	});
 
 	//글쓰기 체크용으로 만든 페이지이다. upload를 반영한다.
-	app.post('/write_check', upload.single("image"), function(req, res) {
+	app.post('/api/write_check', upload.single('image'), function(req, res) {
 		//테스트를 위한 로그 찍음
 		console.log(req.body);
 		console.log(req.file.path);
+		//console.log(req.file.path);
 		//ID, Subject, Contents 데이터를 받는다.
-		var ID = req.body.review.id;
-		var Subject = req.body.review.subject;
-		var Contents = req.body.review.contents;
+		var ID = req.body.id;
+		var Subject = req.body.subject;
+		var Contents = req.body.contents;
 		//이후 Review에 Insertion을 진행하는데 여기서 파일 경로로 image를 저장해야 추후 불러올 수 있다.
 		database.write(ID,Subject,Contents,req.file.path, function(err,data) {
-			if(data) {
-                	        res.send("<script>alert('글쓰기 완료');window.location.href = '/';</script>");
+			if(data == null) {
+                        	res.send('Failure');
                 	} else {
-                	        res.send("<script>alert('글쓰기 실패');window.history.back();</script>");
-                	}
-		});
+                        	console.log('Success!');
+                        	res.send('Success');
+                //res.render('login_check.html', {ID:ID,PW:PW_OUTPUT,result:result, method:"post"});
+                        }
+                });
+
+			//if(data) {
+                	//        res.send("<script>alert('글쓰기 완료');window.location.href = '/';</script>");
+                	//} else {
+                	//        res.send("<script>alert('글쓰기 실패');window.history.back();</script>");
+                	//}
+		//});
 	});
 
 }

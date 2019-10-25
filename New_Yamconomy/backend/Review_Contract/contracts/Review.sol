@@ -9,7 +9,10 @@ contract Review {
     struct Verification {
         //uint Article_num;
         bytes32 Hashing_value;
-        //해시값이 정수이기 때문에 나중에 int형으로 변환.
+        //byte32 는 문자열을 자동으로 hex화 32byte까지 저장함. 
+        //sha 256의 경우, 64byte hex임. 쪼개서 저장하거나, 
+        //아예 문자열방식으로 받아야함. 대신 비용문제 발생
+        
     }
 
     //mapping (uint => Verification) public Verification_Test;

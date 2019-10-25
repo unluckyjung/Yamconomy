@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="web3.min.js"></script>
+    <script src="call_metamask.js"></script>
+
+</head>
+
+<body>
+    <button onclick="trans()">트랜잭션 발생</button>
+</body>
+
+<script>
+    var Web3 = require("web3");
+    web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io"))
+
+    var contract = web3.eth.contract([
+    //var contract = new web3.eth.contract([    //지금 new쓰면 가져오는것도 안됨.
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "A_num",
+                    "type": "uint256"
+                },
+                {
+                    "name": "H_value",
+                    "type": "bytes32"
+                }
+            ],
+            "name": "Write_Review",
+            "outputs": [],
+            "payable": true,
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "constructor"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Article_num",
+            "outputs": [
+                {
+                    "name": "Hashing_value",
+                    "type": "bytes32"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [],
+            "name": "owner",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "address"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "constant": true,
+            "inputs": [
+                {
+                    "name": "A_num",
+                    "type": "uint256"
+                }
+            ],
+            "name": "Review_Verification",
+            "outputs": [
+                {
+                    "name": "",
+                    "type": "bytes32"
+                }
+            ],
+            "payable": false,
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ]).at("0x63D299614dce54Fe198f09DaDF6EfE04ADA435D7");
+
+
+    var hex_value = 0x1088766d3b6b3539397cd22ef824419c722901528243a283a7ddc71d3fab1e87;
+    //3 김용식 죽이고싶다.
+
+    
+
+    function trans() {
+        
+
+        // var tmp = contract.Review_Verification(1);
+        // console.log(tmp);
+
+
+        ethereum.enable().then(function (accounts) {
+            //web3.eth.getAccounts(function(error,accounts){ 
+
+            if (accounts.length == 0) {
+                console.log("plz metamask login");
+                return;
+            };
+
+
+            console.log(accounts[0]);
+            var User_account = accounts[0];
+            //return contract.HIHI(3,2);
+            return contract.Write_Review(3,hex_value,{from: User_account, value: 100});
+
+            //contract.Write_Review(3, hex_value, { from: User_account, value: 0 });
+            //contract.Write_Review(3, hex_value, { from: User_account, value: 0 });
+            //contract.Write_Review();
+            //contract.Write_Review.sendTransaction(3, hex_value, { from: User_account, value : 0});
+
+
+
+        });
+
+    }
+</script>
+<script src="web3.min.js"></script>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        글 번호 : <input type="text" id="input" style="width:60px;">
+        <br>
+        글 제목 : <input type="text" id="input2">
+        <br><br>
+        글 내용 : <input type="text" id="input3" style="width:400px; height:50px">
+        <br>
+    </p>
+    <button onclick="input()">해싱</button>
+    <button onclick="output()">트랜잭션 발생</button>
+
+    <p>
+        <textarea name="textbox" id="textbox" cols="100" rows="5"></textarea>
+    </p>
+    <p>
+        해시값 비교할 글번호 : <input type="text" id="Article_number" style="width:40px;"> <br>
+        <button onclick="output()">해시값 비교하기</button>
+
+    </p>
+
+    <script>
+
+        var temp;
+        var h_temp;
+        function input() {
+            var check = confirm("해싱하시겠습니까?");
+
+            if (check) {
+                temp = document.getElementById("input").value + document.getElementById("input2").value + document.getElementById("input3").value;
+                h_temp = SHA256(temp);
+                document.getElementById("textbox").value = h_temp;
+                alert("해싱완료");
+
+            }
+            else {
+                alert("해싱실패");
+            }
+        }
+        function output() {
+            var hexnum = parseInt(document.getElementById("Article_number").value);
+            console.log(hexnum);
+            var hexvalue = get_hex_from_contract(hexnum);
+            //console.log(hexvalue);
+            h_temp = "0x" + h_temp;
+
+            if (h_temp == hexvalue) {
+                alert("해시값이 같습니다.");
+            }
+            else {
+                alert("해시값이 다릅니다.");
+            }
+        }
+
+    </script>
+    <script src="sha256.js"></script>
+    <!-- 밑에 두놈 추가 -->
+    <script src="web3.min.js"></script>
+    <script src="get_hex.js"></script>
+</body>
+
+
+</html>

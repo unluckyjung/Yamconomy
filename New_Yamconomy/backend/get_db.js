@@ -11,7 +11,7 @@ db_connect = function() {
 }
 
 //로그인 가입 시 아이디 중복을 막기 위해 설치해놓음.
-register_check = function(id) {
+register_check = function(id, result) {
 	var connection = db_connect();
 	var sql = 'SELECT * FROM Account WHERE ID=?';
 	var params = [id];
@@ -22,9 +22,9 @@ register_check = function(id) {
                         console.log(error);
                 } else {
                         if(results == '') {
-                                return true;
+                                result(0, 0);
                         } else {
-                                return false;
+                                result(1, 0);
                         }
                 }
         });
@@ -53,29 +53,29 @@ exports.select_test = function(result) {
 }
 
 //가입 함수이다. Parameter로는 id, password, wallet을 받는다.
-exports.register = function(id,pw,wallet) {
+exports.register = function(id,pw,wallet,result) {
 	//id 중복 체크
-	var results = register_check(id);
-	//만약 중복이 존재하지 않는다면 가입 진행
-	if(results) {
-	//connection 진행
-	var connection = db_connect();
-	//Parameter를 받기 위해 ?를 이용하여 처리
-	var sql = 'INSERT INTO Account(ID,PW,Wallet) VALUES(?,?,?)';
-	//parameter를 정의해준다.
-	var params = [id, pw, wallet];
-	//query문. 주의할 점은 sql, params 이렇게 들어가야 맞다.
-	connection.query(sql, params, function(error, results, fields) {
-		connection.end();
-		if(error) {
-			console.log(error);
-		}
-		console.log('Account Created!');
+	register_check(id, function(err, data) {
+		if(!err) {
+			//connection 진행
+        		var connection = db_connect();
+        		//Parameter를 받기 위해 ?를 이용하여 처리
+       			 var sql = 'INSERT INTO Account(ID,PW,Wallet) VALUES(?,?,?)';
+       			//parameter를 정의해준다.
+        		var params = [id, pw, wallet];
+        		//query문. 주의할 점은 sql, params 이렇게 들어가야 맞다.
+        		connection.query(sql, params, function(error, results, fields) {
+                		connection.end();
+                		if(error) {
+                        		console.log(error);
+                		}
+                		console.log('Account Created!');
+				result(0, 0);
+        		});
+		} else {
+			result(1,0);
+		}	
 	});
-	//만약 중복되는 로그인이 존재한다면 false를 리턴한다.
-	} else {
-		return false;
-	}
 }
 
 //가입 함수이다. Parameter로는 id, password, wallet을 받는다.
