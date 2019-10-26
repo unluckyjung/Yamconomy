@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="web3.min.js"></script>
+    <script src="abi.js"></script>
+    <!-- <script src="call_metamask.js"></script> -->
+
+</head>
+
+<body>
+    <button onclick="trans()">트랜잭션 발생</button>
+</body>
+
+<script>
+    var Web3 = require("web3");
+    // const Tx = require('ethereumjs-tx');
+
+    web4 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/d5356aeca5be404da360ebff1a88300b"))
+    //새로운 객체 web4는 deployed contract 으로부터 data를 읽어오는 용으로 사용할꺼임.
+
+    //web4 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io"))
+    const contract_address = "0x63D299614dce54Fe198f09DaDF6EfE04ADA435D7";    //ropsten deployed  contract address
+
+    //web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))
+
+    // web4 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"))   //가나슈에서 web3를 쓰기위해서 web4로 함.
+    // const contract_address = "0x0b4B148C6AB76335899A1294c22f48964cB04869";  //ganache deployed contract adderess
+
+    const contractInstance = web3.eth.contract(ABI).at(contract_address);
+    //web3임 메타마스크 자체의 web3을 이용함
+    const contract = web4.eth.contract(ABI).at(contract_address);
+    //web4임 web3이 아님 web4인 이유는 새로운 web3 객체를 만들경우, 메타마스크 승인창이 안뜸.
+    const hex_value = 0x1088766d3b6b3539397cd22ef824419c722901528243a283a7ddc71d3fab1e87;
+    //3 김용식 죽이고싶다.
+
+
+    ////======================아래 방법은 불가능함=========================================
+    // console.log(contractInstance);
+    // var tmp = contractInstance.Review_Verification(2, function (error, result) {
+    //     if (!error)
+    //         console.log("good");
+    //     else
+    //         console.error(error);
+    // });
+
+    // console.log("get Review")
+    // console.log(typeof(tmp));
+    // console.log(tmp);
+    ////======================contractInstance는 읽어오는것은 불가능함. -==================
+    //왜냐 web4처럼 ropsten 인퓨라 주소로 컨트랙에 처음에 연결하지 않았기때문인것 같음=========
+
+
+    // 호출함수
+    var tmp = contract.Review_Verification(123);
+    // 이 tmp는 contractt(web4 == ropsten infurad에 연결을 명시해둔놈. 컨트랙으로부터 읽어올 수 있음)
+    console.log("get Review")
+    console.log(tmp);
+
+
+    function trans() {
+        
+        ethereum.enable().then(function (accounts) {
+            //web3.eth.getAccounts(function(error,accounts){ 
+
+            if (accounts.length == 0) {
+                console.log("plz metamask login");
+                return;
+            };
+
+
+            console.log("get account");
+            console.log(accounts[0]);
+            var User_account = accounts[0];
+
+            contractInstance.Write_Review(123, hex_value, { from: User_account, value: 100 }, function (error, result) { });  
+            //아까 위에서 만든, 메타 마스크 자체의 web3를 사용하는 conractInstacne를 이용함.
+            
+            
+            
+            //contract.Write_Review(3,hex_value,{from: User_account});  //  로컬에서 함수명으로 접근시 그냥 승인창 없이 트랜잭션 발생시켜버림.
+            //contract.Write_Review.sendTransaction(3, hex_value,{from:User_account, to:contract_address}); //그냥 쏴버림
+
+
+            //web3.eth.sendTransaction({to:contract_address, from:User_account, value: 1}, function(err,res){ } );
+            //메타마스크 호출가능. 하지만, 컨트랙트의 어느 함수인지는 명시하지않음.
+
+            // web3.eth.sendTransaction({
+            //     to: User_account,
+            //     from: User_account,
+            //     value: 10,
+            // }, function(err,res){ } );   //  계정간에 트랜잭션 발생시, 승인창 요구 
+        });
+
+    }
+</script>
+<script src="web3.min.js"></script>
+
+</html>
