@@ -8,11 +8,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import axios from 'axios';
 import './App.css';
-import make_transaction_to_contract from './js_file/send_hex.js';
-import get_hex_from_contract from './js_file/get_hex.js';
-import SHA256 from './js_file/Sha256.js';
-
-//import * from './js_file/web3.min.js';
 
 export class Topper extends Component {
    
@@ -94,7 +89,7 @@ export class Home extends Component {
 
 	remainingtime() {
 		var cd = new Date();
-		var td = new Date("2019-10-30 10:00:00");
+		var td = new Date("2019-10-30 00:00:00");
 		var nt = parseInt(cd.getTime());
 		var tt = parseInt(td.getTime());
 		var rt = parseInt(parseInt(tt-nt)/1000);
@@ -145,8 +140,7 @@ export class Article extends Component {
         render() {
                 var image = this.props.data.Image, title = this.props.data.Subject, subtitle = this.props.data.Contents, number = this.props.data.Number, S_name = this.props.data.G_ID;
 		//var url = number+"/"+title+"/"+subtitle+"/"+image;
-		//var url = "/api/Review/"+number;
-		var url = "/Review/"+number;
+		var url = "/api/Review/"+number;
                 return(
                         <figure className="snip1584">
 				<img src={image} />
@@ -365,7 +359,7 @@ export class write extends Component {
 			data.append('subject', this.state.subject);
 			data.append('contents', this.state.contents);
 			data.append('image', this.state.image);
-			
+
 			const config = {
 				headers: {
                                 'content-type': 'multipart/form-data'
@@ -377,9 +371,18 @@ export class write extends Component {
                 axios.post('/api/write_check', data, config)
                 .then( res => {
                         //res 안에 array로 데이터가 담겨있다.
-			var hdata = SHA256(res.data.number.toString()+this.state.subject+this.state.contents);
-			console.log(res.data.number, hdata);
-			make_transaction_to_contract(parseInt(res.data.number), hdata);
+                        //alert(JSON.stringify(res.data));
+                        if(res.data === "Success") {
+                                alert("글쓰기 성공!");
+                                //localStorage를 이용한 세션 저장
+
+                                
+                                window.location.href = '/';
+                        } else {
+                                alert("글쓰기 실패!");
+                        }
+
+
                 })
                 .catch(function(err) {
                         console.log(err);
@@ -389,18 +392,13 @@ export class write extends Component {
 
         render() {
                 return (
-                        <div class="write-class">
-								<p class="write-text">리뷰작성</p>
-								<div class="write-container">
-                        	 			<form class="write-form" enctype="multipart/form-data">
-												<table>
-                        								<tr><input class="write-form-title" onChange={this.handleSubjectChange} onKeyPress={this.handleKeyPress} placeholder="제목" type="text" required/></tr>
-                        								<tr><textarea class="write-form-content" rows="20" cols="44" onChange={this.handleContentsChange} onKeyPress={this.handleKeyPress} placeholder="내용" type="textarea" required /></tr>
-                 										<tr><input class="write-form-image"onChange={e => this.handleImageChange(e)} placeholder="이미지" type="file" /></tr>
-														<tr><button class="write-form-button" onClick={this.writing} type="button">글쓰기</button></tr>
-												</table>
-                						</form>
-								</div>
+                        <div>
+                        	 <form className="form-writing" enctype="multipart/form-data">
+                        		<input onChange={this.handleSubjectChange} onKeyPress={this.handleKeyPress} placeholder="제목" type="text" required/>
+                        		<input onChange={this.handleContentsChange} onKeyPress={this.handleKeyPress} placeholder="내용" type="text" required/>
+                        		<input onChange={e => this.handleImageChange(e)} placeholder="이미지" type="file" />
+                			<button className="button_for_write" onClick={this.writing} type="button">글쓰기</button>
+                		</form>
                         </div>
                 )
         }
@@ -547,92 +545,26 @@ export class Review extends Component {
 
 	constructor(props){
 		super(props);
-		this.componentWillMount = this.componentWillMount.bind(this);
-		this.voting_cnt_inc = this.voting_cnt_inc.bind(this);
-		this.state = {
-			ID:'',
-			Number:'',
-			Subject:'',
-			Contents:'',
-			Vote:0,
-			Image:'',
-			IntegrityCheck:'',
-			votingcnt: 3
-                };
 	}
 
-	componentWillMount(props) {
-		var numbers = this.props.match.params.number;
-                axios.get('/api/Review', {
-			params: {
-				number: this.props.match.params.number
-			}
-		})
-                .then( res => {
-                        //res 안에 array로 데이터가 담겨있다.
-                        //alert(JSON.stringify(res.data));
-                        if(res.data === '') {
-                                console.log("실패");
-                                //localStorage를 이용한 세션 저장
-                        } else {
-                                console.log("성공");
-				//console.log(res.data)
-				var image_path = "../"+res.data[0].Image;
-				this.setState({ ID:res.data[0].ID, Number:res.data[0].Number, Subject:res.data[0].Subject, Contents:res.data[0].Contents, Vote:res.data[0].Vote, Image:image_path});
-	                        get_hex_from_contract(this.state.Number).then((hexvalue) => {
-                                	this.setState({
-						IntegrityCheck: hexvalue==SHA256(this.state.Number.toString()+this.state.Subject+this.state.Contents)?true:false
-                                	});
-                                	console.log("체인에서 " + this.state.Number+ "로 가져온  HASH 값 : "+hexvalue);
-					//console.log("현재글 number : " + this.state.Number);	//현재글 번호짝어보려고
-					//
-					console.log("해싱시키는 문자열 : "+this.state.Number+this.state.Subject+this.state.Contents);
-					console.log("현재글 HASH 값 : "+SHA256(this.state.Number.toString()+this.state.Subject+this.state.Contents));
-					console.log(this.state.IntegrityCheck);
-					//if(this.state.IntegrityCheck == true) alert("이 리뷰는 검증된 리뷰입니다");
-					//else alert("이 리뷰는 검증되지 않은  리뷰입니다");
-                		});
-			}
-		}).catch(function(err) {
-                        console.log(err);
-                        console.log("error occured, 관리자에게 문의하세요.");
-                });
-        }
-
-		voting_cnt_inc(props) {
-				this.setState({votingcnt: this.state.votingcnt+1});
-				console.log(this.state.votingcnt);
-				alert("이 리뷰를 추천했습니다 (+1)");
-		}
-
         render() {
+		var ID = this.props.match.params.id;
+		var Subject = this.props.match.params.subject;
+		var Contents = this.props.match.params.contents;
+		var image = this.props.match.params.image;
+		var image_path = this.props.match.params.image_path;
+		var Images = '../../../../../../'+image+'/'+image_path
                 return (
-                        <div class="review-class">
-						 		<div class="review-container">
-										<div class="review-title">
-												<table class="review-title-table">
-														<tr class="review-title-table-row"><div class="review-title-table-title">{this.state.Subject}</div><div class="review-title-table-integrity">{this.state.IntegrityCheck?
-														"[검증]"
-														:
-														<font color="red">[검증에러]</font>
-														}
-														</div>
-														</tr>
-												</table>
-										</div>
-										<hr class="review-hr"/>
-										<div class="review-image">
-												<img src={this.state.Image} />
-										</div>
-										<div class="review-content">
-												{this.state.Contents}
-										</div>
-										<hr class="review-hr"/>
-										<div class="review-button">
-												<input type="button" class="review-votingbutton" onClick={this.voting_cnt_inc} value={this.state.votingcnt} />
-										</div>
-								</div>
+                        <div>
+			{this.props.match.params.number}
+			{ID}
+			{Subject}
+			{Contents}
+			<img src={Images} />
+                                <h3>THis is the test</h3>
                         </div>
                 );
         }
 }
+
+

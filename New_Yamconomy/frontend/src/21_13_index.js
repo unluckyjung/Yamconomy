@@ -13,7 +13,7 @@ ReactDOM.render(
 			<Route path="/write" component={write} />
 			<Route path="/logout" component={logout} />
 			<Route path="/store_register" component={s_register} />
-			<Route path="/Review/:number" component={Review} />
+			<Route path="/Review/:number/:id/:subject/:contents/:image/:image_path" component={Review} />
 			<Route component={Footer} />
 		</div>
 	</Router>,

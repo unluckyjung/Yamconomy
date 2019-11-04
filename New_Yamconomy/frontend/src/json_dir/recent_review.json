@@ -1,0 +1,92 @@
+[
+  {
+    "ID": "djzdjzdl",
+    "Vote": 0,
+    "Number": 1,
+    "Subject": "다시는 안시켜먹을것 같네요.",
+    "Contents": "짜장면은 다 불어텨져서 오고, 짬뽕은 국물이 너무 매워서 먹는내내 힘들었네요.",
+    "Image": "uploads/1572202661098-2019-07-02.jpg",
+    "G_ID" : "중식"
+  },
+    {
+    "ID": "SOFTK",
+    "Vote": 2,
+    "Number": 2,
+    "Subject": "다사랑 치킨 너무 맛있어요.",
+    "Contents": "겉은 바삭 속은 촉촉 전북대학교 치킨계의 명가 다사랑 치킨 입니다. 항상 치맥이 땡기면 여기와서 먹어요.",
+    "Image": "uploads/1572185318447-dasarang.jpg",
+     "G_ID" : "치킨"
+  },
+    {
+    "ID": "djzdjzdl",
+    "Vote": 3,
+    "Number": 3,
+    "Subject": "충만치킨 배불리먹음.",
+    "Contents": "느끼하긴 함",
+    "Image": "uploads/1572185309685-chungman.jpg",
+     "G_ID" : "치킨"
+  },
+       {
+    "ID": "UnluckyJung",
+    "Vote": 4,
+    "Number": 4,
+    "Subject": "영빈관 짜장추천",
+    "Contents": "음식 재탕하는듯",
+    "Image": "uploads/1572185350149-youngbin.jpg",
+     "G_ID" : "중국집"
+  },
+         {
+    "ID": "엌엌이",
+    "Vote": 5,
+    "Number": 5,
+    "Subject": "밥집 추천",
+    "Contents": "이름도 밥집, 맛집",
+    "Image": "uploads/1572204403991-bob-jip.jpg",
+     "G_ID" : "한식"
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 6,
+    "Number": 6,
+    "Subject": "홍대돈까스 너무 느끼함;",
+    "Contents": "맛없어",
+    "Image": "uploads/1572204425450-hong-don.jpg",
+     "G_ID" : "돈까스"
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 7,
+    "Number": 7,
+    "Subject": "불쭈꾸미 맛있어요",
+    "Contents": "조금 맵습니다",
+    "Image": "uploads/1572204444118-fire-jjuggumi.jpg",
+     "G_ID" : "한식"
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 8,
+    "Number": 8,
+    "Subject": "카레팩토리 추천!",
+    "Contents": "맛은 있어요!",
+    "Image": "uploads/1572204462611-care-fac.jpg",
+     "G_ID" : "아시안,양식"
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 9,
+    "Number": 9,
+    "Subject": "육쌈냉면",
+    "Contents": "겨울철 별미!",
+    "Image": "uploads/1572204477462-uk-ssam.jpg",
+     "G_ID" : "냉면"
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 10,
+    "Number": 10,
+    "Subject": "남자들이 정말 좋아할만한 돈까쓰",
+    "Contents": "3인이상 가면 샤브샤브를 서비스로 주고, 현금결제시 할인도 해줘요. 다음에 또 갈 생각입니다.",
+    "Image": "uploads/1572204492837-genjidon.jpg",
+     "G_ID" : "돈까스"
+  }
+]

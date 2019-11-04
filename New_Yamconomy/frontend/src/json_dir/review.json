@@ -1,0 +1,92 @@
+[
+  {
+    "ID": "엌엌이",
+    "Vote": 1,
+    "Number": 1,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327374511-bottlecheck1.png",
+    "G_ID" : 1
+  },
+    {
+    "ID": "엌엌이",
+    "Vote": 2,
+    "Number": 2,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1572023297832-K-shield Jr. 로고.png",
+     "G_ID" : 2
+  },
+    {
+    "ID": "엌엌이",
+    "Vote": 3,
+    "Number": 3,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327100846-pltep.JPG",
+     "G_ID" : 3
+  },
+       {
+    "ID": "엌엌이",
+    "Vote": 4,
+    "Number": 4,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327374511-bottlecheck1.png",
+     "G_ID" : 4
+  },
+         {
+    "ID": "엌엌이",
+    "Vote": 5,
+    "Number": 5,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327374511-bottlecheck1.png",
+     "G_ID" : 5
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 6,
+    "Number": 6,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327374511-bottlecheck1.png",
+     "G_ID" : 6
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 7,
+    "Number": 7,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1571327374511-bottlecheck1.png",
+     "G_ID" : 7
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 8,
+    "Number": 8,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1569945708757-test.jpg",
+     "G_ID" : 8
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 9,
+    "Number": 9,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1569945708757-test.jpg",
+     "G_ID" : 9
+  },
+      {
+    "ID": "엌엌이",
+    "Vote": 10,
+    "Number": 10,
+    "Subject": "앙 기모띠",
+    "Contents": "허미허미허미",
+    "Image": "uploads/1569945708757-test.jpg",
+     "G_ID" : 10
+  }
+]
