@@ -13,6 +13,9 @@
 ## Sequence Diagram
 ![ex_screenshot](./img/sequence1.2.png)
 
+## An introductory video.
+https://www.youtube.com/watch?v=6vyz8LkPKZs
+
 ## Add DataBase
 
 ### Account Table
